@@ -6,7 +6,7 @@
 /*   By: thplemyu <thplemyu@student.42bangkok.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:30:23 by thplemyu          #+#    #+#             */
-/*   Updated: 2026/01/30 14:49:01 by thplemyu         ###   ########.fr       */
+/*   Updated: 2026/02/02 12:42:53 by thplemyu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,23 @@ int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		count;
-	int		i;
 
-	count = 0;
-	i = 0;
+	if (!format)
+		return (-1);
 	va_start(args, format);
-	while (format[i])
+	count = 0;
+	while (*format)
 	{
-		if (format[i] == '%')
+		if (*format == '%')
 		{
-			i++;
-			if (format[i] == '\0')
+			format++;
+			if (*format == '\0')
 				break ;
-			count += ft_format(format[i], args);
+			count += ft_format(*format, args);
 		}
 		else
-			count += ft_putchar(format[i]);
-		i++;
+			count += ft_putchar(*format);
+		format++;
 	}
 	va_end(args);
 	return (count);
